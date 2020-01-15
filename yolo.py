@@ -21,7 +21,7 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'logs/000/trained_final_weight.h5',
+        "model_path": 'logs/trained_weights_final.h5',
         "anchors_path": 'model_data/anchors.txt',
         "classes_path": 'model_data/classes.txt',
         "score": 0.3,

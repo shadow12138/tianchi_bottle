@@ -11,16 +11,24 @@ from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, Ear
 
 from yolo3.model import preprocess_true_boxes, yolo_body, tiny_yolo_body, yolo_loss
 from yolo3.utils import get_random_data
+import shutil
+
+
+def create_dir(root):
+    if os.path.exists(root):
+        shutil.rmtree(root)
+    os.makedirs(root)
 
 
 def _main():
     annotation_path = 'data/train.txt'
-    log_dir = 'logs/000/'
+    log_dir = 'logs/'
     classes_path = 'model_data/classes.txt'
     anchors_path = 'model_data/anchors.txt'
     class_names = get_classes(classes_path)
     num_classes = len(class_names)
     anchors = get_anchors(anchors_path)
+    create_dir(log_dir)
 
     input_shape = (416, 416)  # multiple of 32, hw
 
@@ -118,7 +126,7 @@ def _main():
 
 def get_classes(classes_path):
     '''loads the classes'''
-    with open(classes_path) as f:
+    with open(classes_path, encoding='UTF-8') as f:
         class_names = f.readlines()
     class_names = [c.strip() for c in class_names]
     return class_names

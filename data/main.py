@@ -25,7 +25,7 @@ def generate_yolo_annotation():
                 if cls_id == 0: continue
                 annotations.append(' %d,%d,%d,%d,%s' % (x1, y1, x2, y2, cls_id - 1))
         if len(annotations) > 0:
-            my_annotation.write('%s' % (image['file_name']))
+            my_annotation.write('training_images/%s' % (image['file_name']))
             for annotation in annotations:
                 my_annotation.write(annotation)
             my_annotation.write('\n')
